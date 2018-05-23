@@ -11,11 +11,7 @@ class Main extends React.Component {
         super()
         this.state = {
 
-            currentNote : {
-                id : null,
-                title : '',
-                body : '',
-            },
+            currentNote : this.blankNote(),
 
             notes: [
                 {
@@ -32,17 +28,44 @@ class Main extends React.Component {
         }
     }
 
+    blankNote = () => {
+        return {
+            id: null,
+            title: '',
+            body: '',
+        }
+    }
+
     setCurrentNote = (note) => {
         this.setState({currentNote: note})
     }
-    
+    resetCurrentNote = () => {
+        this.setCurrentNote(this.blankNote())
+    }
+
+    saveNote = (note) => {
+        const notes = [...this.state.notes]
+
+        if (!note.id){
+            //newnote
+            note.id = Date.now()
+            notes.push(note)
+        } else {
+            //existing note
+            notes[ notes.findIndex(currentNote => currentNote.id === note.id) ] = note
+        }
+
+        this.setState({ notes })
+        this.setCurrentNote(note)
+
+    }
 
     render(){
         return (
         <div className="Main" style={style}>
-        <Sidebar/>
+        <Sidebar resetCurrentNote={this.resetCurrentNote} />
         <NoteList notes={this.state.notes} setCurrentNote={this.setCurrentNote} />
-        <NoteForm currentNote={this.state.currentNote}/>
+        <NoteForm currentNote={this.state.currentNote} saveNote={this.saveNote} />
         </div>
         )
     }
