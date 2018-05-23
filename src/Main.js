@@ -1,4 +1,6 @@
 import React from 'react'
+import styleSheet from './style.css'
+
 
 import Sidebar from './Sidebar'
 import NoteList from './NoteList'
