@@ -25,7 +25,7 @@ class Main extends React.Component {
         }
     }
 
-    redner(){
+    render(){
         return (
         <div className="Main" style={style}>
         <Sidebar/>
