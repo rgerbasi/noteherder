@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-import { base } from './base.js'
+import base from './base.js'
 import Sidebar from './Sidebar'
 import NoteList from './NoteList'
 import NoteForm from './NoteForm'
