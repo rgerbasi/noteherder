@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 import base from './base.js'
 import Sidebar from './Sidebar'
@@ -83,9 +83,20 @@ class Main extends React.Component {
     render(){
         return (
         <div className="Main" style={style}>
-        <Sidebar resetCurrentNote={this.resetCurrentNote} />
+        <Sidebar resetCurrentNote={this.resetCurrentNote} signOut={this.props.signOut} />
         <NoteList notes={this.state.notes} setCurrentNote={this.setCurrentNote} />
-        <NoteForm currentNote={this.state.currentNote} saveNote={this.saveNote} removeNote={this.removeNote} />
+        
+        <Route
+            path="/notes/:id"
+            render={(navProps) => (
+                <NoteForm 
+                    currentNote={this.state.currentNote} 
+                    saveNote={this.saveNote} 
+                    removeNote={this.removeNote}
+                    {...navProps}
+                    />
+            )}
+        />
         </div>
         )
     }
